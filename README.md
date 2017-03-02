@@ -1,2 +1,3 @@
-# nic-lan.github.io
-SPA 
+# NicLan
+
+A Single page app about me :-)
