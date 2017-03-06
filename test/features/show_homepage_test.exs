@@ -6,6 +6,6 @@ defmodule ShowHomePageTest do
 
   test "the truth" do
     navigate_to("/")
-    assert visible_page_text() =~ "Welcome to Nic Lan"
+    assert visible_page_text() =~ "niclan"
   end
 end
