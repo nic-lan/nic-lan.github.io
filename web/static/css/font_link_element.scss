@@ -1,0 +1,16 @@
+.fontLinkElement {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  display: inline-block;
+
+  i {
+    transition: color 1s ease;
+    -webkit-transition: color 0.5s ease;
+
+    color: black;
+  }
+
+  i:hover {
+    color: grey;
+  }
+}

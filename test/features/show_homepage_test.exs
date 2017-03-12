@@ -15,5 +15,6 @@ defmodule ShowHomePageTest do
     assert visible_link?("https://github.com/nic-lan")
     assert visible_link?("https://www.linkedin.com/in/nicolaslanguille/")
     assert visible_link?("https://www.instagram.com/whatever_nic_lan/")
+    assert visible_link?("https://soundcloud.com/raum149")
   end
 end

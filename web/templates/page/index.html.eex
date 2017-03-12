@@ -1,16 +1,24 @@
-<div class="page-index">
-  <h1><%= "niclan" %></h1>
-  <p><%= "a musician and a software developer highly interested in clean code and behavior driven development" %></p>
+<div class="pageIndex">
 
-  <%= render "font_link.html",
-        url: "https://github.com/nic-lan",
-        id: "github" %>
+  <h1 class="pageIndex__h1"><%= "niclan" %></h1>
 
-  <%= render "font_link.html",
-        url: "https://www.linkedin.com/in/nicolaslanguille/",
-        id: "linkedin-square" %>
+  <p class="pageIndex__p">
+    <%= "a musician and a software developer highly interested in clean code and behavior driven development" %>
+  </p>
 
-  <%= render "font_link.html",
-        url: "https://www.instagram.com/whatever_nic_lan/",
-        id: "instagram" %>
+    <%= render "font_link.html",
+          url: "https://github.com/nic-lan",
+          id: "github" %>
+
+    <%= render "font_link.html",
+          url: "https://www.linkedin.com/in/nicolaslanguille/",
+          id: "linkedin-square" %>
+
+    <%= render "font_link.html",
+          url: "https://www.instagram.com/whatever_nic_lan/",
+          id: "instagram" %>
+
+    <%= render "font_link.html",
+          url: "https://soundcloud.com/raum149",
+          id: "soundcloud" %>
 </div>
