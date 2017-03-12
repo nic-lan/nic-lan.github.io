@@ -2,15 +2,15 @@
   <h1><%= "niclan" %></h1>
   <p><%= "a musician and a software developer highly interested in clean code and behavior driven development" %></p>
 
-  <%= link(to: "https://github.com/nic-lan") do %>
-    <i class="fa fa-github fa-5x"></i>
-  <% end %>
+  <%= render "font_link.html",
+        url: "https://github.com/nic-lan",
+        id: "github" %>
 
-  <%= link(to: "https://www.linkedin.com/in/nicolaslanguille/") do %>
-    <i class="fa fa-linkedin-square fa-5x"></i>
-  <% end %>
+  <%= render "font_link.html",
+        url: "https://www.linkedin.com/in/nicolaslanguille/",
+        id: "linkedin-square" %>
 
-  <%= link(to: "https://www.instagram.com/whatever_nic_lan/") do %>
-    <i class="fa fa-instagram fa-5x"></i>
-  <% end %>
+  <%= render "font_link.html",
+        url: "https://www.instagram.com/whatever_nic_lan/",
+        id: "instagram" %>
 </div>
