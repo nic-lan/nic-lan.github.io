@@ -17,3 +17,5 @@ erl_crash.dump
 
 /node_modules
 /priv/static
+
+/digital_ocean
