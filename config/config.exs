@@ -8,7 +8,7 @@ use Mix.Config
 # Configures the endpoint
 config :nic_lan, NicLan.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "OtR+DKgbGQ2dWkZiPOH59NmMOobL0e9JUsRe4qX+/zz4abWIC9SKSLpFcW105Alq",
+  secret_key_base: System.get_env("SECRET_KEY_BASE"),
   render_errors: [view: NicLan.ErrorView, accepts: ~w(html json)],
   pubsub: [name: NicLan.PubSub,
            adapter: Phoenix.PubSub.PG2]
