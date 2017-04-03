@@ -10,7 +10,7 @@ defmodule ShowHomePageTest do
     navigate_to("/")
     assert visible_page_text() =~ "niclan"
     assert visible_page_text() =~ "a musician and a software developer highly "
-     <> "interested in clean code and behavior driven development"
+     <> "focused in clean code and smart solutions"
 
     assert visible_link?("https://github.com/nic-lan")
     assert visible_link?("https://www.linkedin.com/in/nicolaslanguille/")

@@ -3,7 +3,7 @@
   <h1 class="pageIndex__h1"><%= "niclan" %></h1>
 
   <p class="pageIndex__p">
-    <%= "a musician and a software developer highly interested in clean code and behavior driven development" %>
+    <%= gettext "a musician and a software developer highly focused in clean code and smart solutions" %>
   </p>
 
     <%= render "font_link.html",
