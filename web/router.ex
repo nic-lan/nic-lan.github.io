@@ -11,6 +11,7 @@ defmodule NicLan.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug API.Authentication
   end
 
   scope "/", NicLan do
@@ -23,12 +24,7 @@ defmodule NicLan.Router do
     pipe_through :api
 
     scope "/posts", as: :posts do
-      resources "/connect", API.Posts.ConnectController, only: [:create]
+      resources "/connect", API.Post.ConnectController, only: [:create]
     end
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", NicLan do
-  #   pipe_through :api
-  # end
 end
