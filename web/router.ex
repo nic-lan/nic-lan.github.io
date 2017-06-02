@@ -19,6 +19,14 @@ defmodule NicLan.Router do
     get "/", PageController, :index
   end
 
+  scope "/api", as: :api do
+    pipe_through :api
+
+    scope "/posts", as: :posts do
+      resources "/connect", API.Posts.ConnectController, only: [:create]
+    end
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", NicLan do
   #   pipe_through :api
