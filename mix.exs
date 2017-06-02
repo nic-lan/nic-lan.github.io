@@ -9,6 +9,7 @@ defmodule NicLan.Mixfile do
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     preferred_cli_env: [espec: :test],
      deps: deps()]
   end
 
@@ -33,6 +34,7 @@ defmodule NicLan.Mixfile do
      {:phoenix_html, "~> 2.6"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:hound, "~> 1.0", only: :test},
+     {:espec_phoenix, "~> 0.6.8", only: :test},
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"}]
   end
