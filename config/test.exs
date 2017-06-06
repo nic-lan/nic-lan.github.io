@@ -11,3 +11,6 @@ config :logger, level: :warn
 
 # Hound
 config :hound, driver: "phantomjs"
+
+config :nic_lan,
+  api_key: "super secret"
