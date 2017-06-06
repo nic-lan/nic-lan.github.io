@@ -24,7 +24,7 @@ defmodule NicLan.Router do
     pipe_through :api
 
     scope "/posts", as: :posts do
-      resources "/connect", API.Post.ConnectController, only: [:create]
+      resources "/connect", API.Posts.ConnectController, only: [:create]
     end
   end
 end
