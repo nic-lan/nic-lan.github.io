@@ -7,7 +7,7 @@ use Mix.Config
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
 config :nic_lan, NicLan.Endpoint,
-  http: [port: System.get_env("PORT")],
+  http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
@@ -33,4 +33,4 @@ config :logger, :console, format: "[$level] $message\n"
 config :phoenix, :stacktrace_depth, 20
 
 config :nic_lan,
-  api_key: "super secret"
+  api_key: System.get_env("API_KEY")
