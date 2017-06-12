@@ -24,8 +24,6 @@ defmodule API.Authentication do
   end
 
   defp secure_compare(request_key, expected_auth_key) do
-    IO.puts request_key
-    IO.puts expected_auth_key
     if(request_key == expected_auth_key, do: :ok)
   end
 
