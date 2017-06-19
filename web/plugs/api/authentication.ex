@@ -1,22 +1,38 @@
 defmodule API.Authentication do
   import Plug.Conn
 
+  require Logger
+
+  @auth_header_key "x-hub-signature"
+
   def init(opts) do
     opts
   end
 
   def call(conn, _opts) do
-    conn
-    |> get_req_header("authorization")
-    |> require_authorization
+    Logger.info IO.inspect conn
+    # IO.inspect "body " <> conn.body_params["body"]
+    Logger.info IO.inspect "api key " <> api_key
+    request_auth_key = get_key_to_digest(conn)
+    Logger.info IO.inspect "request_auth_key " <> request_auth_key
+    expected_auth_key = compute_hmac(conn.body_params["body"])
+    Logger.info IO.inspect "expected_auth_key " <> expected_auth_key
+
+    secure_compare(request_auth_key, expected_auth_key)
     |> redirect(conn)
   end
 
-  defp require_authorization([key]) do
-    if(key == api_key(), do: :ok)
+  defp get_key_to_digest(conn) do
+    get_req_header(conn, @auth_header_key) |> List.first
   end
 
-  defp require_authorization(_), do: :error
+  defp compute_hmac(body) do
+    "sha1=" <> (:crypto.hmac(:sha256, api_key(), body) |> Base.encode16)
+  end
+
+  defp secure_compare(request_key, expected_auth_key) do
+    if(request_key == expected_auth_key, do: :ok)
+  end
 
   defp redirect(:ok, conn) do
     conn
