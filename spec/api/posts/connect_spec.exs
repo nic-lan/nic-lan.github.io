@@ -4,14 +4,13 @@ defmodule NicLan.API.Posts.ConnectControllerSpec do
   let :hmac_hash, do: "whatever"
 
   let(:request_body) do
-    {:ok, request_body} = File.read("spec/fixtures/posts_connect_payload.exs")
-    request_body
+    "{\"body\":\"a body\"}"
   end
 
   let :response do
     build_conn()
     |> put_req_header("x-hub-signature", hmac_hash())
-    |> post("/api/posts/connect", request_body)
+    |> post("/api/posts/connect", body: request_body)
   end
 
   it "POST /api/posts/connect" do
