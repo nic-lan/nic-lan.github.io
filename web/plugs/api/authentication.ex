@@ -8,8 +8,13 @@ defmodule API.Authentication do
   end
 
   def call(conn, _opts) do
+    IO.inspect conn
+    # IO.inspect "body " <> conn.body_params["body"]
+    IO.inspect "api key " <> api_key
     request_auth_key = get_key_to_digest(conn)
-    expected_auth_key = compute_hmac(conn.body_params)
+    IO.inspect "request_auth_key " <> request_auth_key
+    expected_auth_key = compute_hmac(conn.body_params["body"])
+    IO.inspect "expected_auth_key " <> expected_auth_key
 
     secure_compare(request_auth_key, expected_auth_key)
     |> redirect(conn)
@@ -19,8 +24,8 @@ defmodule API.Authentication do
     get_req_header(conn, @auth_header_key) |> List.first
   end
 
-  defp compute_hmac(body_params) do
-    "sha1=" <> (:crypto.hmac(:sha256, api_key, body_params["body"]) |> Base.encode16)
+  defp compute_hmac(body) do
+    "sha1=" <> (:crypto.hmac(:sha256, api_key(), body) |> Base.encode16)
   end
 
   defp secure_compare(request_key, expected_auth_key) do
