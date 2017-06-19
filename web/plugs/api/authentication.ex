@@ -1,6 +1,8 @@
 defmodule API.Authentication do
   import Plug.Conn
 
+  require Logger
+
   @auth_header_key "x-hub-signature"
 
   def init(opts) do
