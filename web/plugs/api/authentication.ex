@@ -8,13 +8,13 @@ defmodule API.Authentication do
   end
 
   def call(conn, _opts) do
-    IO.inspect conn
+    Logger.info IO.inspect conn
     # IO.inspect "body " <> conn.body_params["body"]
-    IO.inspect "api key " <> api_key
+    Logger.info IO.inspect "api key " <> api_key
     request_auth_key = get_key_to_digest(conn)
-    IO.inspect "request_auth_key " <> request_auth_key
+    Logger.info IO.inspect "request_auth_key " <> request_auth_key
     expected_auth_key = compute_hmac(conn.body_params["body"])
-    IO.inspect "expected_auth_key " <> expected_auth_key
+    Logger.info IO.inspect "expected_auth_key " <> expected_auth_key
 
     secure_compare(request_auth_key, expected_auth_key)
     |> redirect(conn)
