@@ -10,6 +10,4 @@ RUN brunch build
 
 RUN mix compile
 
-EXPOSE 80
-
-CMD PORT=80 mix phoenix.server
+CMD mix phoenix.server
