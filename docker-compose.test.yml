@@ -1,4 +1,4 @@
-sut:
+espec:
   image: niclan/nic-lan.github.io:latest
   command: mix espec
   environment:
