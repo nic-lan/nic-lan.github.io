@@ -1,7 +1,7 @@
 version: "3"
 services:
  web:
-   image: username/repository:tag
+   image: niclan/nic-lan.github.io:latest
    environment:
     PORT: 80
     SECRET_KEY_BASE: ${SECRET_KEY_BASE}
