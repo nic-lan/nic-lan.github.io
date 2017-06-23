@@ -13,7 +13,7 @@ use Mix.Config
 # which you typically run after static files are built.
 config :nic_lan, NicLan.Endpoint,
   http: [port: {:system, "PORT"}],
-  url: [host: "niclan.io", port: 80],
+  url: [host: "niclan.io", port: {:system, "PORT"}],
   cache_static_manifest: "priv/static/manifest.json"
 
 # Do not print debug messages in production
