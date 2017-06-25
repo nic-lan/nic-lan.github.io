@@ -1,4 +1,4 @@
-FROM niclan/phoenix-base-no-ecto
+FROM niclan/phoenix-base-no-ecto:latest
 
 COPY . /app
 

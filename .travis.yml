@@ -1,0 +1,27 @@
+sudo: required
+services:
+- docker
+language: elixir
+elixir:
+  - 1.4
+before_script:
+  - "phantomjs -w"
+script:
+  - "MIX_ENV=test mix espec"
+  - "MIX_ENV=test mix test"
+env:
+  global:
+  - DOCKER_IMAGE_NAME=niclan/nic-lan.github.io
+  - COMMIT=${TRAVIS_COMMIT::8}
+  - secure: Uf6ejQFXUL9Rc2lD8oytkDLk2onurpVZemNTANrtqFvXCVcy1UIcIGobU3unb/UPapaXc/vlTAnVhOmCeaXkn1CafR0FYmqw3d5n+biKFmkdLbJLq9ZxhtJMlVlQhDxw9dbm872xcSAFD41Awc3NuE/+DakNHZ+wHgMXPr32kSSIUVakpB4hsBF/hY0KYZG5k2F5WHQoLLp0eIQg1NWwtUtUCrjTrZG9DxhH2ggqhNmdCdtsSsdvpDMXfxvjm9DDUeYi8JvEUvv8wVE7Z6kDry+Whw5DG9uMbKr62k6I1nPzgEY00TajFeIsU5ZbxyS2YcONZwjETqtf26MQalbD7BZ6ZwRHNYaQ+Gb5uXKFnVRtFq/bi7AMT53z8Zp6AXabZ/oXp5yX78T8Eg2bNlsf7VY1NmwdkaQC5V7+V/MK/nyiiMjWDA+fy4UgdtQweTmy/RN6YScpSyhU4ePCnzL11iwYojaRkbtFdJQcg/+gP7g84Q2+CLxeegtctUwnV3hGMnQRo7WxEmIbprX9w6dXI+7xBSyt944bTQLOthGa9UZrTVBQVoxmsC8R7IHdpgVlh2T8lNY44bh+C7EChS+6CdhkKhH2Q8ZPjLNDTNStFUlXspG9/stfz4kben7NIGCRPb7jhdXjUDHwW82JRYHCmLTmy09xLGTq+CxXsS5+mLg=
+  - secure: Q4bI4GLIl8IBRYv9D8M/WMJSd8csUO89iVcHo+vQci3PLelNfY3ApF39lAFhtyRx/KSJ/Ijitm5zkv/Jj6qc54IG7t3YUxasYi7ganTaQsxNpHjJ/dN3ArgEMWjF7TnX4cQSNy0SPqdJExr0+xgEP1EfpUY1Z8SOmW2VHkDtGC1ndjRfV+1UQf4IKYEHoWqsQkpcxFqKe/+IumP0zjWjnzPz/WmiIV/EdSw1Jhk5/+tn9kR3U9kJX+cfgcbI91GpIr9KN6C18fwpYrIy/BgfXk/5rXFvEDaLlcipdxqq/vgH+YLvffXqD+UOc8mL5Pt9grtBPKF86V9rdxWNo8N4MkrKcDngshu4nbZ35SHn/195YXlkPJUVBFj12WTMsR+OCAdhlIZblTIQ9o5kWKxc2pgQYrpO8O4Ucy2NPGE10U/1UyH7FeTeqQB/1tPuwsgsIUJUpFwUM9vdEagw/xLDajWGnrBbd93ah8aQ7vqGN7BPslpvPlc3WqYC/yHCtfbkAPuB5Fyw6RTCKB7SE2Ykgo/yvpxDyILkhS4pCHqhsfLCc7/r6yN7chZ0WkKL0S9vp7dJ6NQegr7YO6853yNfQIz8BrHyaFjk5TKUkiNSrPZvZTMXtTc9IF2+YJEJfG0hdmyiDp1YXFtGJinn9ZDGyIt4wy4QL1ADE/TNUUDBTaw=
+  - secure: Hh++Cv8RdHCLNVhmfnR1VzofLCDyyOlSDtyXlWXFll70SZDwqd2Vc+0RehxJsWn0Pwxic80cDFYDNur020URiEylweIovi5ZH3PTYwVNfdNSfH3iZsWEMA2JGqa/LR8jCXjkHPpR0dmeaL7KuSTkQM26d/PwYYeQr+1SeZUkYAzI547dN31f5zr56ORI5B1teLJm5AMz5wu7zg73jH/0x+24D728ianSKNNteM2g3KWWFDnn7sFaFcXgysadE9dZQjeOHP6iGbdL44E4XAWOX54yyjmh4dXlhNrEGk2ORYEoh1Xns+wIILQ2Wu1dFfKMkPMpvBcfXeVp54x4I7Un2QrH4CRDySnRO2hsjOgteMrblaxHFYsvJ5i54Lwf9DwKeY/9Zre4ujDHSe4sK6Zrqhrd8mB0QkfkjOTBUTK2sapUreyc2KfN0fid2hLa5Td8UqbPHBjcPyKU9s8szt+O4iAw79LiCDXMnppLnzodxSUwTU82Ob8wtUZyA5HqOrEuAiiYZM5VE2s/ybSAGjilUEBTpc5ey6dXQuTVJETirdkCe4n//8ntYofIOS3+7/9JG0T/TXNrMe5KSYJfAYBPOKH40RinQZlk0oTwXWYvwgDJqGpwal6m1mZTxSMaVWMm6uJNWpFUB/wD4/liVoAHV+50hGvo67AIG/DYygbxMGU=
+after_success:
+ - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USER" -p="$DOCKER_PASS"
+ - docker build -f Dockerfile -t $DOCKER_IMAGE_NAME .
+ - if [ ! -z "$TRAVIS_TAG" ]; then
+      docker tag $DOCKER_IMAGE_NAME:latest $DOCKER_IMAGE_NAME:$TRAVIS_TAG;
+    fi
+ - if [ "$TRAVIS_BRANCH" == "master" ]; then
+      docker push $DOCKER_IMAGE_NAME;
+    fi
