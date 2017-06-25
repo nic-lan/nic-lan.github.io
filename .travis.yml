@@ -1,6 +1,11 @@
 sudo: required
 services:
 - docker
+language: elixir
+elixir:
+  - 1.4
+script:
+  - "MIX_ENV=test mix espec"
 env:
   global:
   - DOCKER_IMAGE_NAME=niclan/nic-lan.github.io
