@@ -5,7 +5,7 @@ language: elixir
 elixir:
   - 1.4
 before_script:
-  - "phantomjs -w"
+  - "sh -e phantomjs -w"
 script:
   - "MIX_ENV=test mix espec"
   - "MIX_ENV=test mix test"
