@@ -4,9 +4,10 @@ services:
 language: elixir
 elixir:
   - 1.4
+before_script:
+  - "phantomjs -w"
 script:
   - "MIX_ENV=test mix espec"
-  - "phantomjs -w"
   - "MIX_ENV=test mix test"
 env:
   global:
