@@ -3,8 +3,8 @@ services:
  web:
    image: niclan/nic-lan.github.io:latest
    environment:
-    PORT: 80
+    PORT: 4000
     SECRET_KEY_BASE: ${SECRET_KEY_BASE}
     API_KEY: ${API_KEY}
    ports:
-     - "80:80"
+     - "80:4000"

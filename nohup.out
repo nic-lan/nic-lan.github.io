@@ -1,0 +1,4 @@
+[INFO  - 2017-06-26T09:39:58.162Z] GhostDriver - Main - running on port 8910
+[ERROR - 2017-06-26T09:40:18.090Z] GhostDriver - main.fail - {"line":85,"sourceURL":"phantomjs://code/main.js","stack":"global code@phantomjs://code/main.js:85:56"}
+
+  phantomjs://platform/console++.js:263 in error
