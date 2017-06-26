@@ -1,5 +1,0 @@
-sut:
-  image: niclan/nic-lan.github.io:latest
-  command: bash -c "mix espec"
-  environment:
-    - MIX_ENV=test
