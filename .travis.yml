@@ -5,7 +5,9 @@ language: elixir
 elixir:
   - 1.4
 before_script:
-  - "sh -e phantomjs -w"
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3 # give xvfb some time to start
 script:
   - "MIX_ENV=test mix espec"
   - "MIX_ENV=test mix test"
