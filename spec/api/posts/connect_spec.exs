@@ -3,14 +3,14 @@ defmodule NicLan.API.Posts.ConnectControllerSpec do
 
   let :hmac_hash, do: "whatever"
 
-  let(:request_body) do
-    "{\"body\":\"a body\"}"
+  let(:json_body) do
+    File.read!("spec/fixtures/posts_connect_payload.json") |> Poison.decode!()
   end
 
   let :response do
     build_conn()
     |> put_req_header("x-hub-signature", hmac_hash())
-    |> post("/api/posts/connect", body: request_body)
+    |> post("/api/posts/connect", json_body())
   end
 
   it "POST /api/posts/connect" do
@@ -23,7 +23,7 @@ defmodule NicLan.API.Posts.ConnectControllerSpec do
     end
 
     let :hmac_hash do
-      "sha1=" <> (:crypto.hmac(:sha256, secret_key, request_body()) |> Base.encode16)
+      "sha1=" <> (:crypto.hmac(:sha256, secret_key, Poison.encode!(json_body())) |> Base.encode16)
     end
 
     it "POST /api/posts/connect" do
