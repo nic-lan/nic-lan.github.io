@@ -4,9 +4,12 @@ services:
 language: elixir
 elixir:
   - 1.4
+before_install:
+  - # start your web application and listen on `localhost`
+  - phantomjs --headless --disable-gpu --remote-debugging-port=9222 http://localhost
 script:
   - "MIX_ENV=test mix espec"
-  - "WEBDRIVER=phantomjs MIX_ENV=test mix test"
+  - "MIX_ENV=test mix test"
 env:
   global:
   - DOCKER_IMAGE_NAME=niclan/nic-lan.github.io
