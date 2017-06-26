@@ -5,8 +5,8 @@ language: elixir
 elixir:
   - 1.4
 before_install:
-  - # start your web application and listen on `localhost`
-  - phantomjs --headless --disable-gpu --remote-debugging-port=9222 http://localhost
+  - # make phantomjs listen in the background
+  - "nohup phantomjs --wd &"
 script:
   - "MIX_ENV=test mix espec"
   - "MIX_ENV=test mix test"
