@@ -4,13 +4,9 @@ services:
 language: elixir
 elixir:
   - 1.4
-before_script:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
-  - sleep 3 # give xvfb some time to start
 script:
   - "MIX_ENV=test mix espec"
-  - "MIX_ENV=test mix test"
+  - "WEBDRIVER=phantomjs MIX_ENV=test mix test"
 env:
   global:
   - DOCKER_IMAGE_NAME=niclan/nic-lan.github.io
