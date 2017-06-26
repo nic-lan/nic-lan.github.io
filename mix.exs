@@ -18,7 +18,16 @@ defmodule NicLan.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {NicLan, []},
-     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext]]
+     applications: [
+       :comeonin,
+       :phoenix,
+       :phoenix_pubsub,
+       :phoenix_html,
+       :cowboy,
+       :logger,
+       :gettext
+       ]
+     ]
   end
 
   # Specifies which paths to compile per environment.
@@ -36,6 +45,7 @@ defmodule NicLan.Mixfile do
      {:hound, "~> 1.0", only: :test},
      {:espec_phoenix, "~> 0.6.8", only: :test},
      {:gettext, "~> 0.11"},
+     {:comeonin, "~> 3.0"},
      {:cowboy, "~> 1.0"}]
   end
 end
