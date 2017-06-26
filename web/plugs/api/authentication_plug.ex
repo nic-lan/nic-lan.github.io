@@ -1,6 +1,5 @@
 defmodule API.AuthenticationPlug do
   import Plug.Conn
-  import Comeonin
 
   require Logger
 
@@ -11,15 +10,14 @@ defmodule API.AuthenticationPlug do
   end
 
   def call(conn, _opts) do
-    # request_auth_key = get_key_to_digest(conn)
-    # Logger.info IO.inspect "request_auth_key " <> request_auth_key
-    # expected_auth_key = compute_hmac(conn.body_params)
-    # Logger.info IO.inspect "expected_auth_key " <> expected_auth_key
-    with {:ok, request_auth_key} <- get_key_to_digest(conn)
+    with {:ok, request_auth_key} <- get_key_to_digest(conn),
+         {:ok, encoded_body} <- Poison.encode(conn.body_params),
+         {:ok, expected_auth_key} <- compute_hmac(encoded_body),
+         {:ok} <- secure_compare(request_auth_key, expected_auth_key)
     do
       redirect(:ok, conn)
     else
-      err -> redirect(:error, conn)
+      _err -> redirect(:error, conn)
     end
   end
 
@@ -32,13 +30,21 @@ defmodule API.AuthenticationPlug do
     end
   end
 
-  defp compute_hmac(body) do
-    {:ok, encoded_body} = Poison.encode(body)
-    "sha1=" <> (:crypto.hmac(:sha256, api_key(), encoded_body) |> Base.encode16)
+  defp compute_hmac(encoded_body) do
+    {:ok, "sha1=" <> hmac_by_text(encoded_body)}
+  end
+
+  defp hmac_by_text(text) do
+    :crypto.hmac(:sha, api_key(), text) |> Base.encode16 |> String.downcase
   end
 
   defp secure_compare(request_key, expected_auth_key) do
-    if(request_key == expected_auth_key, do: :ok)
+    IO.puts request_key
+    IO.puts expected_auth_key
+    case request_key == expected_auth_key do
+      true  -> {:ok}
+      false -> {:error, Comeonin.Bcrypt.dummy_checkpw()}
+    end
   end
 
   defp redirect(:ok, conn) do
