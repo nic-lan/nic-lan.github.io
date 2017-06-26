@@ -11,7 +11,7 @@ defmodule NicLan.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
-    plug API.Authentication
+    plug API.AuthenticationPlug
   end
 
   scope "/", NicLan do
