@@ -8,6 +8,6 @@ RUN yes | mix deps.get
 
 RUN brunch build
 
-RUN mix compile
+RUN yes | mix compile
 
 CMD mix phoenix.server
