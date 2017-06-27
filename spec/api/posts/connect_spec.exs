@@ -14,16 +14,20 @@ defmodule NicLan.API.Posts.ConnectControllerSpec do
   end
 
   it "POST /api/posts/connect" do
-    expect(response().status).to eq(401)
+    expect(response().status).to eq(400)
   end
 
   context "when a valid secret key is provided" do
-    let :secret_key do
-      Application.get_env(:nic_lan, :api_key)
+    let :hmac_hash do
+      "sha1=" <> hmac()
     end
 
-    let :hmac_hash do
-      "sha1=" <> (:crypto.hmac(:sha256, secret_key, Poison.encode!(json_body())) |> Base.encode16)
+    let :api_key, do: Application.get_env(:nic_lan, :api_key)
+    let :encoded_body, do: Poison.encode(json_body())
+    let :hmac do
+      :crypto.hmac(:sha, api_key(), elem(encoded_body(),1))
+      |> Base.encode16
+      |> String.downcase
     end
 
     it "POST /api/posts/connect" do
