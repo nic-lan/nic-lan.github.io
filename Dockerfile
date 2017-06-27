@@ -8,4 +8,6 @@ RUN yes | mix deps.get
 
 RUN brunch build
 
-CMD mix phoenix.server
+RUN MIX_ENV=prod mix compile
+
+CMD MIX_ENV=prod mix phoenix.server
