@@ -10,14 +10,14 @@ defmodule API.AuthenticationPlug do
   end
 
   def call(conn, _opts) do
-    with {:ok, request_auth_key} <- get_key_to_digest(conn),
-         {:ok, encoded_body} <- Poison.encode(conn.body_params),
+    with {:ok, request_auth_key}  <- get_key_to_digest(conn),
+         {:ok, encoded_body}      <- Poison.encode(conn.body_params),
          {:ok, expected_auth_key} <- compute_hmac(encoded_body),
-         {:ok} <- secure_compare(request_auth_key, expected_auth_key)
+         {:ok}                    <- secure_compare(request_auth_key, expected_auth_key)
     do
-      redirect(:ok, conn)
+      conn
     else
-      _err -> redirect(:error, conn)
+      _err -> redirect_bad_request(conn)
     end
   end
 
@@ -39,19 +39,13 @@ defmodule API.AuthenticationPlug do
   end
 
   defp secure_compare(request_key, expected_auth_key) do
-    IO.puts request_key
-    IO.puts expected_auth_key
     case request_key == expected_auth_key do
       true  -> {:ok}
       false -> {:error, Comeonin.Bcrypt.dummy_checkpw()}
     end
   end
 
-  defp redirect(:ok, conn) do
-    conn
-  end
-
-  defp redirect(_, conn) do
+  defp redirect_bad_request(conn) do
     conn
     |> send_resp(400, "bad request")
     |> halt
