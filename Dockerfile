@@ -4,9 +4,9 @@ COPY . /app
 
 WORKDIR /app
 
-RUN yes | mix deps.get
-
 RUN brunch build
+
+RUN yes | mix deps.get
 
 RUN MIX_ENV=prod mix compile
 
