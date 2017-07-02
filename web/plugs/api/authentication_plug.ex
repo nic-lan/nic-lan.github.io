@@ -39,6 +39,9 @@ defmodule API.AuthenticationPlug do
   end
 
   defp secure_compare(request_key, expected_auth_key) do
+    IO.inspect "request key " <> request_key
+    IO.inspect "expected auth key " <> expected_auth_key
+
     case request_key == expected_auth_key do
       true  -> {:ok}
       false -> {:error, Comeonin.Bcrypt.dummy_checkpw()}
