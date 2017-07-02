@@ -8,7 +8,7 @@ RUN yes | mix deps.get --only prod
 
 RUN MIX_ENV=prod mix compile
 
-RUN brunch build --production
+RUN brunch build
 
 RUN MIX_ENV=prod mix phoenix.digest
 
