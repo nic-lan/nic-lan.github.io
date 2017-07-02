@@ -18,9 +18,11 @@ RUN npm install -g brunch
 
 RUN brunch build
 
-RUN yes | mix deps.get
-
 RUN mix local.rebar --force
+
+RUN mix local.hex --force
+
+RUN yes | mix deps.get
 
 RUN MIX_ENV=prod mix compile
 
