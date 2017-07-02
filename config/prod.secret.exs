@@ -9,5 +9,5 @@ use Mix.Config
 # kept out of version control and might be hard to recover
 # or recreate for your teammates (or you later on).
 config :nic_lan,
-  secret_key_base: System.get_env("SECRET_KEY_BASE")
+  secret_key_base: System.get_env("SECRET_KEY_BASE"),
   api_key: System.get_env("API_KEY")
