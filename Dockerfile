@@ -10,6 +10,10 @@ RUN apt-get -y install libssl-dev
 RUN curl -sL https://deb.nodesource.com/setup_7.x | bash -
 RUN apt-get install -y nodejs
 
+# install the Phoenix Mix archive
+RUN mix archive.install --force https://github.com/phoenixframework/archives/raw/master/phoenix_new-1.2.4.ez
+RUN mix local.hex --force && mix local.rebar --force
+
 COPY . /app
 
 WORKDIR /app
@@ -17,10 +21,6 @@ WORKDIR /app
 RUN npm install -g brunch
 
 RUN brunch build
-
-RUN mix local.rebar --force
-
-RUN mix local.hex --force
 
 RUN yes | mix deps.get
 
