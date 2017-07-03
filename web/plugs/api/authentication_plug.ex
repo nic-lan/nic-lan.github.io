@@ -10,7 +10,7 @@ defmodule API.AuthenticationPlug do
   end
 
   def call(conn, _opts) do
-    IO.inspect conn.body_params
+    IO.inspect Poison.encode!(conn.body_params)
 
     with {:ok, request_auth_key}  <- get_key_to_digest(conn),
          {:ok, encoded_body}      <- Poison.encode(conn.body_params),
