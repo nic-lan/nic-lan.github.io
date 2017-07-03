@@ -23,7 +23,7 @@ defmodule NicLan.API.Posts.ConnectControllerSpec do
     end
 
     let :api_key, do: Application.get_env(:nic_lan, :api_key)
-    let :encoded_body, do: Poison.encode(json_body())
+    let :encoded_body, do: Poison.encode!(json_body())
     let :hmac do
       :crypto.hmac(:sha, api_key(), elem(encoded_body(),1))
       |> Base.encode16
