@@ -43,7 +43,6 @@ defmodule NicLan.Mixfile do
      {:phoenix_html, "~> 2.6"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:hound, "~> 1.0", only: :test},
-     {:espec_phoenix, "~> 0.6.8", only: :test},
      {:gettext, "~> 0.11"},
      {:comeonin, "~> 3.0"},
      {:cowboy, "~> 1.0"}]
