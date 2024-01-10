@@ -1,5 +1,0 @@
-<div class="fontLinkElement">
-  <%= link(to: @url, target: "_blank") do %>
-    <i class="fa fa-<%= @id %> fa-2x"></i>
-  <% end %>
-</div>
